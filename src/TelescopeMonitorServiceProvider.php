@@ -11,9 +11,9 @@ class TelescopeMonitorServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->publishes([__DIR__ . '../config/telescope-monitor.php'], config_path('telescope-monitor.php'));
+        $this->publishes([__DIR__ . '/../config/telescope-monitor.php' => config_path('telescope-monitor.php')]);
 
-        $this->mergeConfigFrom(__DIR__ . '../config/telescope-monitor.php', 'telescope-monitor');
+        $this->mergeConfigFrom(__DIR__ . '/../config/telescope-monitor.php', 'telescope-monitor');
 
         if (! is_null($channel = config('telescope-monitor.log_channel'))) {
             Telescope::afterStoring(

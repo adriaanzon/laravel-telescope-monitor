@@ -15,7 +15,7 @@ class TelescopeMonitorServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__ . '/../config/telescope-monitor.php', 'telescope-monitor');
 
-        if (! is_null($channel = config('telescope-monitor.log_channel'))) {
+        if (filled($channel = config('telescope-monitor.log_channel'))) {
             Telescope::afterStoring(
                 fn($entries) => $this->app->make(TelescopeExceptionLogger::class)->log($entries, $channel)
             );

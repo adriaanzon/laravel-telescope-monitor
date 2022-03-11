@@ -1,0 +1,36 @@
+{
+    "name": "adriaanzon/laravel-telescope-monitor",
+    "description": "Exception monitoring via Laravel Telescope",
+    "keywords": [
+        "laravel",
+        "telescope",
+        "logging",
+        "monitoring",
+        "notifications",
+        "slack"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "laravel/telescope": "^4.7"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.4",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "AdriaanZon\\TelescopeMonitor\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AdriaanZon\\TelescopeMonitor\\TelescopeMonitorServiceProvider"
+            ]
+        }
+    }
+}

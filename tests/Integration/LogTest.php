@@ -14,7 +14,7 @@ class LogTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function getEnvironmentSetUp($app)
+    protected function defineEnvironment($app)
     {
         $app['config']->set('telescope-monitor.log_channel', 'null');
     }

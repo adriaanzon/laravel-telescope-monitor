@@ -13,7 +13,7 @@ class ReportFailedJobListener
 {
     public function handle(JobFailed $event): void
     {
-        if (! config('telescope.enabled')) {
+        if (! config('telescope.enabled') || ! config('telescope-monitor.report_failed_jobs')) {
             return;
         }
 

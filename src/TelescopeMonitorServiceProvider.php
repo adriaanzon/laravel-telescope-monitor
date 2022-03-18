@@ -15,17 +15,13 @@ class TelescopeMonitorServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__ . '/../config/telescope-monitor.php', 'telescope-monitor');
 
-        if (filled($channel = config('telescope-monitor.log_channel'))) {
-            Telescope::afterStoring(
-                fn($entries) => $this->app->make(TelescopeExceptionLogger::class)->log($entries, $channel)
-            );
-        }
+        Telescope::afterStoring(
+            fn($entries) => $this->app->make(TelescopeExceptionLogger::class)->logToConfiguredChannel($entries)
+        );
     }
 
     public function boot()
     {
-        if (config('telescope-monitor.report_failed_jobs')) {
-            Event::listen(JobFailed::class, ReportFailedJobListener::class);
-        }
+        Event::listen(JobFailed::class, ReportFailedJobListener::class);
     }
 }

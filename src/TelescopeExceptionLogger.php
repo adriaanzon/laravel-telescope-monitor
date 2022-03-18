@@ -31,4 +31,13 @@ class TelescopeExceptionLogger
             }
         }
     }
+
+    public function logToConfiguredChannel(array $entries): void
+    {
+        if (blank($channel = config('telescope-monitor.log_channel'))) {
+            return;
+        }
+
+        $this->log($entries, $channel);
+    }
 }

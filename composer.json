@@ -15,6 +15,7 @@
         "laravel/telescope": "^4.7"
     },
     "require-dev": {
+        "orchestra/testbench": "^7.1",
         "phpstan/phpstan": "^1.4",
         "squizlabs/php_codesniffer": "^3.6"
     },
@@ -23,7 +24,13 @@
             "AdriaanZon\\TelescopeMonitor\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "config": {
+        "optimize-autoloader": true,
         "sort-packages": true
     },
     "extra": {

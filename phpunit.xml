@@ -1,0 +1,17 @@
+<phpunit
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+        bootstrap="vendor/autoload.php"
+        colors="true"
+>
+    <testsuites>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="APP_KEY" value="base64:Ukd/g56Lu0RTqKsuQiBFrwJkbQM4J36+TBEA89ZolW4=" />
+        <env name="DB_CONNECTION" value="testing" />
+        <env name="QUEUE_CONNECTION" value="database" />
+    </php>
+</phpunit>

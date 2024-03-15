@@ -1,0 +1,5 @@
+providers:
+  - Laravel\Telescope\TelescopeServiceProvider
+  - AdriaanZon\TelescopeMonitor\TelescopeMonitorServiceProvider
+migrations:
+  - vendor/laravel/telescope/database/migrations

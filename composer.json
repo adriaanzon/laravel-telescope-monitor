@@ -12,7 +12,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "laravel/telescope": "^4.7"
+        "laravel/telescope": "^4.7|^5.0"
     },
     "require-dev": {
         "orchestra/testbench": "^7.1",

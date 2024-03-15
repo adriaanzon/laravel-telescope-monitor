@@ -1,0 +1,6 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Access to an undefined property Laravel\\\\Telescope\\\\Storage\\\\EntryModel\\:\\:\\$content\\.$#"
+			count: 1
+			path: src/TelescopeEntryRepository.php

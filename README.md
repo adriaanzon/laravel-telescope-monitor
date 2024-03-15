@@ -16,10 +16,16 @@ composer require adriaanzon/laravel-telescope-monitor
 
 ## Configuration
 
-The configuration channel can be configured by adding `TELESCOPE_MONITOR_LOG_CHANNEL` to your dotenv file, for example:
+The log channel can be configured by adding `TELESCOPE_MONITOR_LOG_CHANNEL` to your dotenv file, for example:
 
 ```dotenv
 TELESCOPE_MONITOR_LOG_CHANNEL=slack
+```
+
+In your local development environment, you'd typically disable Laravel Telescope Monitor by excluding `TELESCOPE_MONITOR_LOG_CHANNEL` from your .env file or setting it to null:
+
+```dotenv
+TELESCOPE_MONITOR_LOG_CHANNEL=null
 ```
 
 To configure other options, you can publish the [configuration file][]:

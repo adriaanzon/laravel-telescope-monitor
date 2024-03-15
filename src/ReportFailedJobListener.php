@@ -13,7 +13,7 @@ class ReportFailedJobListener
 {
     public function handle(JobFailed $event): void
     {
-        if (! config('telescope.enabled') || ! config('telescope-monitor.report_failed_jobs')) {
+        if (! config()->boolean('telescope.enabled') || ! config()->boolean('telescope-monitor.report_failed_jobs')) {
             return;
         }
 
@@ -32,9 +32,9 @@ class ReportFailedJobListener
      */
     public function recordException(Throwable $exception): void
     {
-        $trace = collect($exception->getTrace())->map(function ($item) {
-            return Arr::only($item, ['file', 'line']);
-        })->toArray();
+        $trace = collect($exception->getTrace())
+            ->map(fn(array $item) => Arr::only($item, ['file', 'line']))
+            ->toArray();
 
         Telescope::recordException(new IncomingExceptionEntry($exception, [
             'class' => get_class($exception),

@@ -3,23 +3,25 @@
 namespace Tests\Integration;
 
 use Exception;
+use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Laravel\Telescope\ExceptionContext;
 use Laravel\Telescope\IncomingExceptionEntry;
 use Laravel\Telescope\Telescope;
+use Orchestra\Testbench\Attributes\DefineEnvironment;
 use Tests\TestCase;
 
 class LogTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function usesNullLogChannel($app)
+    protected function usesNullLogChannel(Application $app): void
     {
         $app['config']->set('telescope-monitor.log_channel', 'null');
     }
 
-    public function testExceptionsDontGetLoggedWithoutConfiguration()
+    public function testExceptionsDontGetLoggedWithoutConfiguration(): void
     {
         $exception = new Exception('whoops');
 
@@ -37,8 +39,8 @@ class LogTest extends TestCase
         $this->app->call(Telescope::store(...));
     }
 
-    /** @define-env usesNullLogChannel */
-    public function testExceptionsGetLoggedToLogConfiguredChannel()
+    #[DefineEnvironment('usesNullLogChannel')]
+    public function testExceptionsGetLoggedToLogConfiguredChannel(): void
     {
         $exception = new Exception('whoops');
 
@@ -53,7 +55,7 @@ class LogTest extends TestCase
 
         Log::shouldReceive('channel->error')->once()->with('whoops', [
             'type' => Exception::class,
-            'location' => __FILE__ . ':' . 43,
+            'location' => __FILE__ . ':' . 45,
             'details' => 'http://localhost/telescope/exceptions/' . $entry->uuid,
         ]);
 

@@ -9,7 +9,7 @@ use Laravel\Telescope\Telescope;
 
 class TelescopeMonitorServiceProvider extends ServiceProvider
 {
-    public function register()
+    public function register(): void
     {
         $this->publishes([__DIR__ . '/../config/telescope-monitor.php' => config_path('telescope-monitor.php')]);
 
@@ -20,7 +20,7 @@ class TelescopeMonitorServiceProvider extends ServiceProvider
         );
     }
 
-    public function boot()
+    public function boot(): void
     {
         Event::listen(JobFailed::class, ReportFailedJobListener::class);
     }

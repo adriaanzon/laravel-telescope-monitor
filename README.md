@@ -6,6 +6,9 @@ Laravel already allows you to get notified when something goes wrong in your app
 
 This package aims to solve that problem by logging the exceptions recorded by Telescope to a log channel. When an exception has already occurred before (according to the data stored by Telescope), it will not be logged again.
 
+> [!TIP]
+> Laravel 10 added support for [throttling reported exceptions][]. You should use that instead, if you're only interested in preventing floods of notifications.
+
 Exceptions causing a queued job to fail will also be recorded as a Telescope exception entry, so they will also be logged to the configured channel.
 
 ## Installation
@@ -34,5 +37,6 @@ To configure other options, you can publish the [configuration file][]:
 php artisan vendor:publish --provider="AdriaanZon\TelescopeMonitor\TelescopeMonitorServiceProvider"
 ```
 
-[log stack]: https://laravel.com/docs/9.x/logging#building-log-stacks
+[log stack]: https://laravel.com/docs/11.x/logging#building-log-stacks
 [configuration file]: config/telescope-monitor.php
+[throttling reported exceptions]: https://laravel.com/docs/11.x/errors#throttling-reported-exceptions

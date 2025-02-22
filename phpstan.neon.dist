@@ -10,3 +10,4 @@ parameters:
         - config
     databaseMigrationsPath:
         - vendor/laravel/telescope/database/migrations
+    noEnvCallsOutsideOfConfig: false

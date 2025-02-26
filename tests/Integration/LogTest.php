@@ -16,11 +16,17 @@ class LogTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function hasNoLogChannelConfigured(Application $app): void
+    {
+        $app['config']->set('telescope-monitor.log_channel', null);
+    }
+
     protected function usesNullLogChannel(Application $app): void
     {
         $app['config']->set('telescope-monitor.log_channel', 'null');
     }
 
+    #[DefineEnvironment('hasNoLogChannelConfigured')]
     public function testExceptionsDontGetLoggedWithoutConfiguration(): void
     {
         $exception = new Exception('whoops');
@@ -43,6 +49,7 @@ class LogTest extends TestCase
     public function testExceptionsGetLoggedToLogConfiguredChannel(): void
     {
         $exception = new Exception('whoops');
+        $exceptionLine = __LINE__ - 1;
 
         Telescope::recordException($entry = new IncomingExceptionEntry($exception, [
             'class' => get_class($exception),
@@ -55,10 +62,12 @@ class LogTest extends TestCase
 
         Log::shouldReceive('channel->error')->once()->with('whoops', [
             'type' => Exception::class,
-            'location' => __FILE__ . ':' . 45,
+            'location' => __FILE__ . ':' . $exceptionLine,
             'details' => 'http://localhost/telescope/exceptions/' . $entry->uuid,
         ]);
 
         $this->app->call(Telescope::store(...));
+
+        $this->assertTrue(true);
     }
 }

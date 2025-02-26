@@ -9,8 +9,6 @@ This package aims to solve that problem by logging the exceptions recorded by Te
 > [!TIP]
 > Laravel 10 added support for [throttling reported exceptions][]. You should use that instead, if you're only interested in preventing floods of notifications.
 
-Exceptions causing a queued job to fail will also be recorded as a Telescope exception entry, so they will also be logged to the configured channel.
-
 ## Installation
 
 ```shell

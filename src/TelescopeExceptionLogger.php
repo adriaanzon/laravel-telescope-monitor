@@ -19,15 +19,17 @@ readonly class TelescopeExceptionLogger
      */
     public function log(array $entries, ?string $channel = null): void
     {
-        foreach ($entries as $entry) {
-            if ($entry instanceof IncomingExceptionEntry && $this->entryRepository->isUniqueException($entry)) {
+        collect($entries)
+            ->whereInstanceOf(IncomingExceptionEntry::class)
+            ->unique(fn(IncomingExceptionEntry $entry) => $entry->familyHash())
+            ->where(fn(IncomingExceptionEntry $entry) => $this->entryRepository->isUniqueException($entry))
+            ->each(function (IncomingExceptionEntry $entry) use ($channel) {
                 Log::channel($channel)->error($entry->content['message'], [
                     'type' => $entry->content['class'],
                     'location' => $entry->content['file'] . ':' . $entry->content['line'],
                     'details' => url(config()->string('telescope.path') . '/exceptions/' . $entry->uuid),
                 ]);
-            }
-        }
+            });
     }
 
     /**

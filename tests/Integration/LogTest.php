@@ -67,7 +67,5 @@ class LogTest extends TestCase
         ]);
 
         $this->app->call(Telescope::store(...));
-
-        $this->assertTrue(true);
     }
 }

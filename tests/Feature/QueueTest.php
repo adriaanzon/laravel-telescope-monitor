@@ -44,7 +44,7 @@ class QueueTest extends TestCase
         $this->assertSame(1, substr_count($log, "Failed {$identifier}"));
     }
 
-    public function testNonReportingJobDoesNotGetLogged(): void
+    public function testNonReportingIsLoggedOnce(): void
     {
         $identifier = (string) Str::uuid();
 
@@ -54,7 +54,7 @@ class QueueTest extends TestCase
         $log = file_get_contents(storage_path('logs/laravel.log'));
 
         $this->assertSame(1, substr_count($log, "Running {$identifier}"));
-        $this->assertSame(0, substr_count($log, "Failed {$identifier}"));
+        $this->assertSame(1, substr_count($log, "Failed {$identifier}"));
     }
 }
 

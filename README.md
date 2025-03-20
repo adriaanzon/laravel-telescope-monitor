@@ -9,6 +9,8 @@ This package aims to solve that problem by logging the exceptions recorded by Te
 > [!TIP]
 > Laravel 10 added support for [throttling reported exceptions][]. You should use that instead, if you're only interested in preventing floods of notifications.
 
+By default, Telescope only logs failed jobs as an entry on the "Jobs" tab. This package additionally logs them as an exception entry so you will be notified of failed jobs as well. Note that when [manually failing a job][], it doesn't matter whether you call the [report()][] helper or not; the exception will be logged by the package either way. If you want to disable this behavior, you can do so by disabling `report_failed_jobs` in the configuration file.
+
 ## Installation
 
 ```shell
@@ -35,6 +37,8 @@ To configure other options, you can publish the [configuration file][]:
 php artisan vendor:publish --provider="AdriaanZon\TelescopeMonitor\TelescopeMonitorServiceProvider"
 ```
 
-[log stack]: https://laravel.com/docs/11.x/logging#building-log-stacks
+[log stack]: https://laravel.com/docs/12.x/logging#building-log-stacks
 [configuration file]: config/telescope-monitor.php
-[throttling reported exceptions]: https://laravel.com/docs/11.x/errors#throttling-reported-exceptions
+[throttling reported exceptions]: https://laravel.com/docs/12.x/errors#throttling-reported-exceptions
+[manually failing a job]: https://laravel.com/docs/12.x/queues#manually-failing-a-job
+[report()]: https://laravel.com/docs/12.x/helpers#method-report

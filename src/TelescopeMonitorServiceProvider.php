@@ -19,4 +19,9 @@ class TelescopeMonitorServiceProvider extends ServiceProvider
             fn($entries) => $this->app->make(TelescopeExceptionLogger::class)->logToConfiguredChannel($entries),
         );
     }
+
+    public function boot(): void
+    {
+        Event::listen(JobFailed::class, ReportFailedJobListener::class);
+    }
 }
